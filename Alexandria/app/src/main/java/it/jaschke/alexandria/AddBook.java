@@ -14,7 +14,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +21,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
+import com.google.zxing.client.android.CaptureActivity;
 
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.BookService;
@@ -50,24 +47,21 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == 0) {
+            if (resultCode == getActivity().RESULT_OK) {
+                String contents =
+                        intent.getStringExtra("SCAN_RESULT");
+                String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+                if(format.equals("EAN_13")){
+                    ean.setText(contents);
+                }
 
-        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        Log.e("some data", scanningResult.toString());
-
-        String scanContent = scanningResult.getContents();
-        if (scanContent != null) {
-
-            Log.e("DATA", scanContent);
-            ean.setText(scanContent);
-        } else {
-            Toast.makeText(getActivity(), "No scan data received!", Toast.LENGTH_LONG).show();
-
-
+            }
         }
-
+        super.onActivityResult(requestCode, resultCode, intent);
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -144,8 +138,11 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
                 //Toast toast = Toast.makeText(context, text, duration);
                 //toast.show();
-                IntentIntegrator scanIntegrator = new IntentIntegrator(getActivity());
-                scanIntegrator.initiateScan();
+                //IntentIntegrator scanIntegrator = new IntentIntegrator(getActivity());
+                //scanIntegrator.initiateScan();
+                Intent intent = new Intent(getActivity(), CaptureActivity.class);
+                intent.putExtra("com.google.zxing.client.android.SCAN.SCAN_MODE", "QR_CODE_MODE");
+                startActivityForResult(intent, 0);
 
             }
         });
