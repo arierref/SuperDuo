@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="xtoken">d4319804221a43fca7b546e71f13b9dc</string>
     <string name="app_name">Football Scores</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
