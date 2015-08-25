@@ -193,8 +193,8 @@ public class myFetchService extends IntentService
                 League = League.replace(SEASON_LINK,"");
                 if (League.equals(PREMIER_LEAGUE)      ||
                         League.equals(SERIE_A)             ||
-                        //League.equals(BUNDESLIGA1)         ||
-                        //League.equals(BUNDESLIGA2)         ||
+                        League.equals(BUNDESLIGA1)         ||
+                        League.equals(BUNDESLIGA2)         ||
                         League.equals(PRIMERA_DIVISION))
                 {
                     match_id = match_data.getJSONObject(LINKS).getJSONObject(SELF).

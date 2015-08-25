@@ -5,20 +5,44 @@ package barqsoft.footballscores;
  */
 public class Utilies
 {
-    public static final int SERIE_A = 357;
+    /*public static final int SERIE_A = 357;
     public static final int PREMIER_LEGAUE = 354;
     public static final int CHAMPIONS_LEAGUE = 362;
     public static final int PRIMERA_DIVISION = 358;
-    public static final int BUNDESLIGA = 351;
+    public static final int BUNDESLIGA = 351;*/
+
+    public static final int BUNDESLIGA2 = 395;
+    public static final int LIGUE1 = 396;
+    public static final int LIGUE2 = 397;
+    public static final int SEGUNDA_DIVISION = 400;
+    public static final int PRIMEIRA_LIGA = 402;
+    public static final int BUNDESLIGA3 = 403;
+    public static final int EREDIVISIE = 404;
+
+    public static final int SERIE_A = 401;
+    public static final int PREMIER_LEAGUE = 398;
+    public static final int CHAMPIONS_LEAGUE = 362;
+    public static final int PRIMERA_DIVISION = 399;
+    public static final int BUNDESLIGA = 394;
+
     public static String getLeague(int league_num)
     {
         switch (league_num)
         {
-            case SERIE_A : return "Seria A";
-            case PREMIER_LEGAUE : return "Premier League";
-            case CHAMPIONS_LEAGUE : return "UEFA Champions League";
-            case PRIMERA_DIVISION : return "Primera Division";
-            case BUNDESLIGA : return "Bundesliga";
+            case SERIE_A : return "Seria A\nItaly";
+            case PREMIER_LEAGUE : return "Premier League\nEngland";
+            case CHAMPIONS_LEAGUE : return "UEFA Champions League\n Europe";
+            case PRIMERA_DIVISION : return "Primera Division \n Spain";
+            case BUNDESLIGA : return "Bundesliga\n Germany";
+
+            case BUNDESLIGA2 : return "Bundesliga2\n Germany";
+            case BUNDESLIGA3 : return "Bundesliga3\n Germany";
+            case LIGUE1 : return "LIGUE1 \n France";
+            case LIGUE2 : return "LIGUE2 \n France";
+            case SEGUNDA_DIVISION : return "SEGUNDA_DIVISION \n Spain";
+            case PRIMEIRA_LIGA : return "PRIMEIRA_LIGA \n Portugal";
+            case EREDIVISIE : return "EREDIVISIE \n Netherlands";
+
             default: return "Not known League Please report";
         }
     }
@@ -67,11 +91,12 @@ public class Utilies
 
     public static int getTeamCrestByTeamName (String teamname)
     {
-        if (teamname==null){return R.drawable.no_icon;}
+        if (teamname==null){return R.drawable.no_image;}
         switch (teamname)
         {
-            case "Arsenal London FC" : return R.drawable.arsenal;
+            case "Arsenal FC" : return R.drawable.arsenal;
             case "Manchester United FC" : return R.drawable.manchester_united;
+            case "Manchester City FC" : return R.drawable.manchester_city;
             case "Swansea City" : return R.drawable.swansea_city_afc;
             case "Leicester City" : return R.drawable.leicester_city_fc_hd_logo;
             case "Everton FC" : return R.drawable.everton_fc_logo1;
@@ -80,7 +105,8 @@ public class Utilies
             case "West Bromwich Albion" : return R.drawable.west_bromwich_albion_hd_logo;
             case "Sunderland AFC" : return R.drawable.sunderland;
             case "Stoke City FC" : return R.drawable.stoke_city;
-            default: return R.drawable.no_icon;
+            case "Liverpool FC" : return R.drawable.liverpool;
+            default: return R.drawable.no_image;
         }
     }
 }
