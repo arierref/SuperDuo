@@ -9,10 +9,32 @@
     android:backgroundTint="#70ffffff">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:orientation="vertical"
+        android:layout_margin="6dp"
+        android:background="@color/red01">
+
+        <TextView
+            android:id="@+id/widgetTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/test_text"
+            android:textSize="20dp"
+            android:contentDescription="@string/home_team"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="6dp">
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,7 +103,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
 

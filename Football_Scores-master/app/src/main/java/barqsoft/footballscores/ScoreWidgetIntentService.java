@@ -10,9 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-/**
- * Created by Arierref on 08/26/2015.
- */
 public class ScoreWidgetIntentService extends IntentService {
     // A "projection" defines the columns that will be returned for each row
     private static final String[] SCORE_COLUMNS = {
@@ -83,12 +80,9 @@ public class ScoreWidgetIntentService extends IntentService {
             data.close();
 
             // Perform this loop procedure for each Today widget
-            for (
-                    int appWidgetId
-                    : appWidgetIds)
-            {
+            for ( int appWidgetId : appWidgetIds ) {
+
                 int layoutId = R.layout.scores_widget;
-                //RemoteViews views = new RemoteViews(context.getPackageName(), layoutId);
                 RemoteViews views = new RemoteViews(getPackageName(), layoutId);
 
                 //TODO change the widget icon to generic icon
@@ -98,8 +92,8 @@ public class ScoreWidgetIntentService extends IntentService {
                 views.setTextViewText(R.id.home_name, home);
                 views.setTextViewText(R.id.away_name, away);
                 views.setTextViewText(R.id.data_textview, mTime);
+                views.setTextViewText(R.id.widgetTitle, mDate + " - " + Utilies.getLeague(league));
                 views.setTextViewText(R.id.score_textview, Utilies.getScores(home_goals, away_goals));
-                //views.setTextViewText(R.id.league_textview,Utilies.getLeague(league));
 
                 // Create an Intent to launch MainActivity
                 Intent launchIntent = new Intent(this, MainActivity.class);
@@ -111,7 +105,5 @@ public class ScoreWidgetIntentService extends IntentService {
 
             }
         }
-}
-
-
+    }
 }

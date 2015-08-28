@@ -13,9 +13,19 @@ public class MainActivity extends ActionBarActivity
     public static int current_fragment = 2;
     private final String save_tag = "Save Test";
     private PagerFragment my_main;
+
+    /*@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private void forceRTLIfSupported()
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+        }
+    }*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //forceRTLIfSupported();
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             my_main = new PagerFragment();
@@ -24,7 +34,6 @@ public class MainActivity extends ActionBarActivity
                     .commit();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

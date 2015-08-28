@@ -8,9 +8,7 @@ import android.os.Bundle;
 
 import barqsoft.footballscores.service.myFetchService;
 
-/**
- * * Created by Arierref on 08/26/2015.
- */
+
 public class ScoreWidgetProvider extends AppWidgetProvider {
 
 
