@@ -47,7 +47,8 @@ public class scoresAdapter extends CursorAdapter
         final ViewHolder mHolder = (ViewHolder) view.getTag();
         mHolder.home_name.setText(cursor.getString(COL_HOME));
         mHolder.away_name.setText(cursor.getString(COL_AWAY));
-        mHolder.date.setText(cursor.getString(COL_MATCHTIME));
+        mHolder.date.setText(cursor.getString(COL_DATE));
+        mHolder.hour.setText(cursor.getString(COL_MATCHTIME));
         mHolder.score.setText(Utilies.getScores(cursor.getInt(COL_HOME_GOALS),cursor.getInt(COL_AWAY_GOALS)));
         mHolder.match_id = cursor.getDouble(COL_ID);
         mHolder.home_crest.setImageResource(Utilies.getTeamCrestByTeamName(
@@ -78,8 +79,11 @@ public class scoresAdapter extends CursorAdapter
                 public void onClick(View v)
                 {
                     //add Share Action
-                    context.startActivity(createShareForecastIntent(mHolder.home_name.getText()+" "
-                    +mHolder.score.getText()+" "+mHolder.away_name.getText() + " "));
+                    if(mHolder.score.getText() == " - ") {
+                        context.startActivity(createShareForecastIntent("Don't miss this football game: " + mHolder.date.getText() + " at " + mHolder.hour.getText() + " - " + mHolder.home_name.getText() + " VS " + mHolder.away_name.getText()));
+                    }else {
+                        context.startActivity(createShareForecastIntent("You missed this game: " + mHolder.home_name.getText() + " " + mHolder.score.getText() + " " + mHolder.away_name.getText()));
+                    }
                 }
             });
         }
@@ -93,7 +97,8 @@ public class scoresAdapter extends CursorAdapter
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + FOOTBALL_SCORES_HASHTAG);
+        //shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + FOOTBALL_SCORES_HASHTAG);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText);
         return shareIntent;
     }
 

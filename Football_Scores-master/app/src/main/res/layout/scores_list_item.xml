@@ -52,6 +52,12 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:id="@+id/data_textview"/>
+            <TextView
+                android:visibility="invisible"
+                android:text="@string/test_text"
+                android:id="@+id/data2_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
         <LinearLayout
