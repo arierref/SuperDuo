@@ -10,6 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import java.util.Random;
+
 public class ScoreWidgetIntentService extends IntentService {
     // A "projection" defines the columns that will be returned for each row
     private static final String[] SCORE_COLUMNS = {
@@ -62,20 +64,23 @@ public class ScoreWidgetIntentService extends IntentService {
        SQLiteDatabase db = new ScoresDBHelper(getBaseContext()).getReadableDatabase();
        Cursor data = db.query(DatabaseContract.SCORES_TABLE, SCORE_COLUMNS, null, null, null, null, DatabaseContract.scores_table.DATE_COL + " ASC");
 
+        Random r = new Random();
+        int i1 = r.nextInt(data.getCount() - 0) + 0;
+
         if (data == null) {
             return;
         } else if (data.getCount() < 1) {
             data.close();
             Log.e("Data Empty", "No data");
         }
-        else if (data.moveToFirst()) {
+        else if (data.moveToPosition(i1)) {
             String away = data.getString(COL_AWAY);
             String home = data.getString(COL_HOME);
             int away_goals = data.getInt(COL_AWAY_GOALS);
             int home_goals = data.getInt(COL_HOME_GOALS);
             int league = data.getInt(COL_LEAGUE);
             String mTime = data.getString(COL_MATCHTIME);
-            int match_day = data.getInt(COL_MATCHDAY);
+            //int match_day = data.getInt(COL_MATCHDAY);
             String mDate = data.getString(COL_DATE);
             data.close();
 
@@ -84,8 +89,6 @@ public class ScoreWidgetIntentService extends IntentService {
 
                 int layoutId = R.layout.scores_widget;
                 RemoteViews views = new RemoteViews(getPackageName(), layoutId);
-
-                //TODO change the widget icon to generic icon
 
                 views.setImageViewResource(R.id.home_crest, Utilies.getTeamCrestByTeamName(home));
                 views.setImageViewResource(R.id.away_crest, Utilies.getTeamCrestByTeamName(away));
